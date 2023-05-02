@@ -1,0 +1,65 @@
+app: web-proyecto-serverless
+org: jeffer24
+#console: true
+
+service: serverless-church-module
+
+frameworkVersion: '3'
+
+#plugins:
+  #- serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: "us-east-1"
+  stage: ${opt:stage}
+
+  apiGateway:
+    request:
+      schemas:
+        church-input-model:
+          name: ChurchInputModel
+          schema: ${file(infraestructure/handlers/schemas/churchs-schema.json)}
+          description: "Validacion de los datos de la congregacion"
+
+functions:
+  getChurchs:
+    handler: infraestructure/handlers/churchs-handler.getChurchs
+    events:
+      - http:
+          path: churchs
+          method: get
+          #cors: true
+          #authorizer: aws_iam
+  createChurch:
+    handler: infraestructure/handlers/churchs-handler.createChurch
+    events:
+      - http:
+          path: churchs
+          method: post
+          request:
+            schemas:
+              application/json: ${file(infraestructure/handlers/schemas/churchs-schema.json)}
+
+  updateChurch:
+    handler: infraestructure/handlers/churchs-handler.updateChurch
+    events:
+      - http:
+          path: churchs/{id}
+          method: put
+          request:
+            schemas:
+              application/json: ${file(infraestructure/handlers/schemas/churchs-schema.json)}
+  deleteChurch:
+    handler: infraestructure/handlers/churchs-handler.deleteChurch
+    events:
+      - http:
+          path: churchs/{id}
+          method: delete  
+  getDetailChurch:
+    handler: infraestructure/handlers/churchs-handler.getDetailChurch
+    events:
+      - http:
+          path: churchs/{id}
+          method: get
