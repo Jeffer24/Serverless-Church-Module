@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ChurchInputModel",
+  "description": "Validacion de las iglesias de la aplicacion.",
+  "type": "object",
+  "properties": {
+      "nombreIglesia": {
+        "description": "Nombre de la Iglesia",
+        "type": "string",
+        "minLength":2,
+        "maxLength":200
+      },
+      "direccionIglesia": {
+        "description": "Direccion de la iglesia",
+        "type": "string",
+        "minLength":2,
+        "maxLength":200
+      },
+      "telefono": {
+        "description": "Telefono de la iglesia",
+        "type": "string",
+        "maximum": 15,
+        "minimum":1
+      },
+        "idZonas": {
+        "description": "Id de la zona de la iglesia",
+        "type": "integer",
+        "maximum": 1000,
+        "minimum":1
+      },
+        "estado": {
+        "description": "Estado de la iglesia",
+        "type": "integer",
+        "maximum": 1,
+        "minimum":0
+      }
+        
+  },
+  "required": [ "nombreIglesia", "estado", "idZonas" ]
+}

@@ -4,12 +4,12 @@ const {
   structureFail,
 } = require("../helpers/responses");
 const { StatusCodes } = require("http-status-codes");
-const usuarioUseCase = require("../../domain/usecase/usuarios-usecase");
+const churchUseCase = require("../../domain/usecase/churches-usecase");
 
-const getUsuarios = async () => {
+const getChurches = async () => {
   let response = null;
   try {
-    const result = await usuarioUseCase.getUsuarios();
+    const result = await churchUseCase.getChurches();
     response = responseSuccess({ data: result });
   } catch (error) {
     response = structureFail({
@@ -19,13 +19,13 @@ const getUsuarios = async () => {
   return response;
 };
 
-const createUsuario = async (usuarioData) => {
+const createChurch = async (churchData) => {
   let response = null;
   try {
-    await usuarioUseCase.createUsuario(usuarioData);
+    await churchUseCase.createChurch(churchData);
     response = responseSuccess(
       {
-        message: "Usuario creado.",
+        message: "Church creado.",
       },
       StatusCodes.CREATED
     );
@@ -37,17 +37,17 @@ const createUsuario = async (usuarioData) => {
   return response;
 };
 
-const updateUsuario = async (usuarioData, idUsuario) => {
+const updateChurch = async (churchData, idChurch) => {
   let response = null;
   try {
-    //console.log('usuario Data updated ', usuarioData, idUsuario);
-    //Validamos si existe el usuario
-    response = await validarExistencia(idUsuario);
+    //console.log('church Data updated ', churchData, idChurch);
+    //Validamos si existe el church
+    response = await validarExistencia(idChurch);
     if (response.data) {
-      const result = await usuarioUseCase.updateUsuario(usuarioData, idUsuario);
+      const result = await churchUseCase.updateChurch(churchData, idChurch);
       response = responseSuccess(
         {
-          message: "Usuario actualizado.",
+          message: "Church actualizado.",
           data: result,
         },
         StatusCodes.OK
@@ -61,17 +61,17 @@ const updateUsuario = async (usuarioData, idUsuario) => {
   return response;
 };
 
-const deleteUsuario = async (idUsuario) => {
+const deleteChurch = async (idChurch) => {
   let response = null;
   try {
-    //console.log('usuario Data elimiar ', idUsuario);
-    // Validamos si existe el usuario
-    response = await validarExistencia(idUsuario);
+    //console.log('church Data elimiar ', idChurch);
+    // Validamos si existe el church
+    response = await validarExistencia(idChurch);
     if (response.data) {
-      await usuarioUseCase.deleteUsuario(idUsuario);
+      await churchUseCase.deleteChurch(idChurch);
       response = responseSuccess(
         {
-          message: "Usuario eliminado.",
+          message: "Church eliminado.",
         },
         StatusCodes.OK
       );
@@ -84,11 +84,11 @@ const deleteUsuario = async (idUsuario) => {
   return response;
 };
 
-const getDetailUsuario = async (idUsuario) => {
+const getDetailChurch = async (idChurch) => {
   let response = null;
   try {
-    //console.log('usuario Data consultar ', idUsuario);
-    response = await validarExistencia(idUsuario);
+    //console.log('church Data consultar ', idChurch);
+    response = await validarExistencia(idChurch);
   } catch (error) {
     response = structureFail({
       message: "Error inesperado.",
@@ -97,9 +97,9 @@ const getDetailUsuario = async (idUsuario) => {
   return response;
 };
 
-const validarExistencia = async (idUsuario) => {
+const validarExistencia = async (idChurch) => {
   let response = null;
-  const result = await usuarioUseCase.getDetailUsuario(idUsuario);
+  const result = await churchUseCase.getDetailChurch(idChurch);
 
   if (result) {
     response = responseSuccess(
@@ -112,7 +112,7 @@ const validarExistencia = async (idUsuario) => {
     response = responseSuccess(
       {
         data: null,
-        message: "Usuario no encontrado.",
+        message: "Church no encontrado.",
       },
       StatusCodes.NOT_FOUND
     );
@@ -122,9 +122,9 @@ const validarExistencia = async (idUsuario) => {
 };
 
 module.exports = {
-  getUsuarios,
-  createUsuario,
-  updateUsuario,
-  deleteUsuario,
-  getDetailUsuario,
+  getChurches,
+  createChurch,
+  updateChurch,
+  deleteChurch,
+  getDetailChurch,
 };

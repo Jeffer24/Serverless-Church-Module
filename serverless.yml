@@ -20,46 +20,46 @@ provider:
       schemas:
         church-input-model:
           name: ChurchInputModel
-          schema: ${file(infraestructure/handlers/schemas/churchs-schema.json)}
+          schema: ${file(infraestructure/handlers/schemas/churches-schema.json)}
           description: "Validacion de los datos de la congregacion"
 
 functions:
-  getChurchs:
-    handler: infraestructure/handlers/churchs-handler.getChurchs
+  getChurches:
+    handler: infraestructure/handlers/churches-handler.getChurches
     events:
       - http:
-          path: churchs
+          path: churches
           method: get
           #cors: true
           #authorizer: aws_iam
   createChurch:
-    handler: infraestructure/handlers/churchs-handler.createChurch
+    handler: infraestructure/handlers/churches-handler.createChurch
     events:
       - http:
-          path: churchs
+          path: churches
           method: post
           request:
             schemas:
-              application/json: ${file(infraestructure/handlers/schemas/churchs-schema.json)}
+              application/json: ${file(infraestructure/handlers/schemas/churches-schema.json)}
 
   updateChurch:
-    handler: infraestructure/handlers/churchs-handler.updateChurch
+    handler: infraestructure/handlers/churches-handler.updateChurch
     events:
       - http:
-          path: churchs/{id}
+          path: churches/{id}
           method: put
           request:
             schemas:
-              application/json: ${file(infraestructure/handlers/schemas/churchs-schema.json)}
+              application/json: ${file(infraestructure/handlers/schemas/churches-schema.json)}
   deleteChurch:
-    handler: infraestructure/handlers/churchs-handler.deleteChurch
+    handler: infraestructure/handlers/churches-handler.deleteChurch
     events:
       - http:
-          path: churchs/{id}
+          path: churches/{id}
           method: delete  
   getDetailChurch:
-    handler: infraestructure/handlers/churchs-handler.getDetailChurch
+    handler: infraestructure/handlers/churches-handler.getDetailChurch
     events:
       - http:
-          path: churchs/{id}
+          path: churches/{id}
           method: get
