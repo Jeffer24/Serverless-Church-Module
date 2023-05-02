@@ -1,5 +1,5 @@
 {
-  "name": "serverless-chucrh-module",
+  "name": "serverless-church-module",
   "version": "1.0.0",
   "main": "handler.js",
   "author": "Jefferson Rangel",
